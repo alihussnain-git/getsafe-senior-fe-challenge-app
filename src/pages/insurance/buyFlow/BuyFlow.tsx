@@ -1,18 +1,11 @@
 import React, { useState } from 'react'
-import AgeStep from './AgeStep'
-import EmailStep from './EmailStep'
-import SummaryStep from './SummaryStep'
+import { ProductIds, PRODUCT_IDS_TO_NAMES } from '../InsurancePage'
+import AgeStep from './components/AgeStep'
+import EmailStep from './components/EmailStep'
+import SummaryStep from './components/SummaryStep'
 
 interface BuyFlowProps {
   productId: ProductIds
-}
-
-export enum ProductIds {
-  devIns = 'dev_ins',
-}
-
-const PRODUCT_IDS_TO_NAMES = {
-  [ProductIds.devIns]: 'Developer Insurance',
 }
 
 const BuyFlow: React.FC<BuyFlowProps> = (props) => {
