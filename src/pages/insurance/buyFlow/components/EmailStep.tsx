@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { BuyFlowForm } from '../../../../components/BuyFlowForm'
-import { EmailStepData } from '../types'
+import { CustomTextInput } from '../../../../components/CustomTextInput';
+import { EmailStepData, PreviousStep } from '../types'
 
-interface Props {
+interface Props extends PreviousStep{
   value?: string;
   onNext(data: EmailStepData): void;
 }
@@ -10,23 +11,21 @@ interface Props {
 const EmailStep: React.FC<Props> = ({
   value,
   onNext,
+  onPre
 }) => {
   const [email, setEmail] = useState(value)
 
   return (
-    <BuyFlowForm onNext={() => onNext({ email })} >
-      <div>
-        <label htmlFor={'email'} >
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          onChange={({ target: { value } }) => setEmail(value)}
-          value={email}
-          required
-          autoFocus />
-      </div>
+    <BuyFlowForm onNext={() => onNext({ email })} onPre={onPre} >
+      <CustomTextInput
+        label="Email"
+        id="email"
+        type="email"
+        onChange={({ target: { value } }) => setEmail(value)}
+        required
+        value={email}
+        autoFocus
+      />
     </BuyFlowForm>
   )
 }

@@ -1,33 +1,36 @@
 import React, { useState } from 'react'
 import { BuyFlowForm } from '../../../../components/BuyFlowForm'
-import { AgeStepData } from '../types'
+import { CustomTextInput } from '../../../../components/CustomTextInput';
+import { AgeStepData, BuyingFlowAgeStep, PreviousStep } from '../types'
 
 
-interface Props {
+interface Props extends PreviousStep {
   value?: number;
   onNext(data: AgeStepData): void;
 }
 
-const AgeStep: React.FC<Props> = ({
+const AgeStep: React.FC<Props & Omit<BuyingFlowAgeStep, 'stepId'>> = ({
   value,
   onNext,
+  onPre,
+  min,
+  max
 }) => {
   const [age, setAge] = useState(value)
 
   return (
-    <BuyFlowForm onNext={() => onNext({ age })} >
-      <div>
-        <label htmlFor={'age'} >
-          Age
-        </label>
-        <input
-          required
-          autoFocus
-          onChange={({ target: { value } }) => setAge(Number(value))}
-          type="number"
-          id="age"
-          value={age} />
-      </div>
+    <BuyFlowForm onNext={() => onNext({ age })} onPre={onPre}>
+      <CustomTextInput
+        label="Age"
+        id="age"
+        type="number"
+        onChange={({ target: { value } }) => setAge(Number(value))}
+        required
+        value={String(age)}
+        autoFocus
+        min={min}
+        max={max}
+      />
     </BuyFlowForm>
   )
 }

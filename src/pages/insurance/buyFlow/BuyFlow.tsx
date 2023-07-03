@@ -21,6 +21,10 @@ const BuyFlow: React.FC<Props> = ({ productId }) => {
     []
   );
 
+  const onPressPre = useCallback(() => {
+    setCurrentStepIndex((prevStepIndex) => (prevStepIndex > 0 ? prevStepIndex - 1 : 0));
+  }, [setCurrentStepIndex]);
+
   if (!steps) {
     return <div>Error: No steps found for this product ID</div>;
   }
@@ -32,6 +36,8 @@ const BuyFlow: React.FC<Props> = ({ productId }) => {
       step={currentStep}
       data={collectedData}
       onNext={onPressNext}
+      onPre={currentStepIndex ? onPressPre : undefined}
+
     />
   );
 };
