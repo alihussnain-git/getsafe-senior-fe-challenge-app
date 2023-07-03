@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import './App.css'
 
@@ -15,26 +14,24 @@ import { ProductIds } from './utils/productIds'
 const App: React.FC = () => {
 
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route
-            path={ROUTES.INSURANCE.DEVELOPER_INSURANCE}
-            element={<InsurancePage productId={ProductIds.DeveloperInsurance} />}
-          />
-          <Route
-            path={ROUTES.INSURANCE.DESIGNER_INSURANCE}
-            element={<InsurancePage productId={ProductIds.DesignerInsurance} />}
-          />
-          <Route path={ROUTES.HOME} element={<HomePage />} />
-          <Route
-            path={ROUTES.INSURANCE.SUCCESSFULLY_BOUGHT}
-            element={<SuccessfulPurchasePage />}
-          />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route
+          path={ROUTES.INSURANCE.DEVELOPER_INSURANCE}
+          element={<InsurancePage productId={ProductIds.DeveloperInsurance} />}
+        />
+        <Route
+          path={ROUTES.INSURANCE.DESIGNER_INSURANCE}
+          element={<InsurancePage productId={ProductIds.DesignerInsurance} />}
+        />
+        <Route path={ROUTES.HOME} element={<HomePage />} />
+        <Route
+          path={ROUTES.INSURANCE.SUCCESSFULLY_BOUGHT}
+          element={<SuccessfulPurchasePage />}
+        />
+      </Routes>
+    </div>
   )
 }
 

@@ -23,13 +23,11 @@ const BuyFlowStepRenderer: React.FC<Props> = ({
 
     const renderStep = () => {
         switch (step.stepId) {
-            case StepIds.Age:
+            case StepIds.Name:
                 return (
-                    <AgeStep
-                        value={data.age}
+                    <NameStep
+                        value={{ firstName: data.firstName, lastName: data.lastName }}
                         onNext={onNext}
-                        max={step.max}
-                        min={step.min}
                         onPre={onPre}
                     />
                 );
@@ -41,12 +39,13 @@ const BuyFlowStepRenderer: React.FC<Props> = ({
                         onPre={onPre}
                     />
                 );
-
-            case StepIds.Name:
+            case StepIds.Age:
                 return (
-                    <NameStep
-                        value={{ firstName: data.firstName, lastName: data.lastName }}
+                    <AgeStep
+                        value={data.age}
                         onNext={onNext}
+                        max={step.max}
+                        min={step.min}
                         onPre={onPre}
                     />
                 );
