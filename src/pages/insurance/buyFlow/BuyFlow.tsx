@@ -1,34 +1,39 @@
-import React, { useState } from 'react'
-import { ProductIds } from '../../../utils/productIds'
-import AgeStep from './components/AgeStep'
-import EmailStep from './components/EmailStep'
-import SummaryStep from './components/SummaryStep'
+import React, { useCallback, useState } from 'react';
+import { getBuyStepById } from '../../../utils/getBuyStepById';
+import { ProductIds } from '../../../utils/productIds';
+import BuyFlowStepRenderer from './components/BuyFlowStepRenderer';
+import { BuyingFlowData } from './types';
 
-interface BuyFlowProps {
-  productId: ProductIds
+interface Props {
+  productId: ProductIds;
 }
 
-const BuyFlow: React.FC<BuyFlowProps> = (props) => {
-  const [currentStep, setStep] = useState('email')
-  const [collectedData, updateData] = useState({
-    email: '',
-    age: 0,
-  })
-  const getStepCallback = (nextStep: string) => (field: string, value: any) => {
-    updateData({ ...collectedData, [field]: value })
-    setStep(nextStep)
+const BuyFlow: React.FC<Props> = ({ productId }) => {
+  const steps = getBuyStepById(productId);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [collectedData, setCollectedData] = useState<BuyingFlowData>({});
+
+  const onPressNext = useCallback(
+    (updatedData: BuyingFlowData) => {
+      setCollectedData((prevData) => ({ ...prevData, ...updatedData }));
+      setCurrentStepIndex((prevIndex) => prevIndex + 1);
+    },
+    []
+  );
+
+  if (!steps) {
+    return <div>Error: No steps found for this product ID</div>;
   }
-  return (
-    <>
-      {(currentStep === 'email' && <EmailStep cb={getStepCallback('age')} />) ||
-        (currentStep === 'age' && (
-          <AgeStep cb={getStepCallback('summary')} />
-        )) ||
-        (currentStep === 'summary' && (
-          <SummaryStep collectedData={collectedData} />
-        ))}
-    </>
-  )
-}
 
-export default BuyFlow
+  const currentStep = steps[currentStepIndex];
+
+  return (
+    <BuyFlowStepRenderer
+      step={currentStep}
+      data={collectedData}
+      onNext={onPressNext}
+    />
+  );
+};
+
+export default BuyFlow;

@@ -1,25 +1,34 @@
 import React, { useState } from 'react'
+import { BuyFlowForm } from '../../../../components/BuyFlowForm'
+import { AgeStepData } from '../types'
 
-interface AgeStepProps {
-  cb: (field: string, value: number) => void
+
+interface Props {
+  value?: number;
+  onNext(data: AgeStepData): void;
 }
 
-const AgeStep: React.FC<AgeStepProps> = (props) => {
-  const [age, setAge] = useState(0)
+const AgeStep: React.FC<Props> = ({
+  value,
+  onNext,
+}) => {
+  const [age, setAge] = useState(value)
+
   return (
-    <>
+    <BuyFlowForm onNext={() => onNext({ age })} >
       <div>
-        Age:{' '}
+        <label htmlFor={'age'} >
+          Age
+        </label>
         <input
+          required
+          autoFocus
+          onChange={({ target: { value } }) => setAge(Number(value))}
           type="number"
-          onChange={({ target: { value } }) => {
-            setAge(Number(value))
-          }}
-          value={age}
-        ></input>
+          id="age"
+          value={age} />
       </div>
-      <button onClick={() => props.cb('age', age)}>Next</button>
-    </>
+    </BuyFlowForm>
   )
 }
 

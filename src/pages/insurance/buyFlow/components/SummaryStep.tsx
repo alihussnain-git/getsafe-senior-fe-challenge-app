@@ -1,22 +1,46 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { BuyFlowForm } from '../../../../components/BuyFlowForm'
+import { BuyingFlowData } from '../types'
 
-interface SummaryStepProps {
-  collectedData: {
-    email: string
-    age: number
-  }
+interface Props {
+  data: BuyingFlowData;
 }
 
-const SummaryStep: React.FC<SummaryStepProps> = (props) => {
-  return (
-    <>
-      <div>Email: {props.collectedData.email}</div>
-      <div>Age: {props.collectedData.age}</div>
+interface DataItemProps {
+  label: string;
+  value: string | number;
+}
+
+const SummaryStep: React.FC<Props> = ({
+  data,
+}) => {
+
+
+  const DataItem = ({ label, value }: DataItemProps) => {
+    return (
       <div>
-        <Link to="/purchased=dev_ins">Purchase</Link>
+        <span>{label}</span>
+        <span>
+          <b>{value}</b>
+        </span>
       </div>
-    </>
+    )
+  }
+
+  const renderCollectedData = () => {
+    return (<>
+      {Object.entries(data).map(([key, value]) => {
+        const label = `${(key)}: `
+        return (
+          <DataItem key={key} label={label} value={value} />
+        )
+      })}</>)
+  }
+
+  return (
+    <BuyFlowForm nextButtonText='Submit' onNext={() => { }}>
+      {renderCollectedData()}
+    </BuyFlowForm>
   )
 }
 

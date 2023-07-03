@@ -5,7 +5,7 @@ import { PRODUCT_IDS_TO_NAMES } from '../../utils/productNames'
 import BuyFlow from './buyFlow/BuyFlow'
 
 interface Props {
-    productId: ProductIds
+    productId: ProductIds;
 }
 
 const InsurancePage: React.FC<Props> = ({ productId }) => {
