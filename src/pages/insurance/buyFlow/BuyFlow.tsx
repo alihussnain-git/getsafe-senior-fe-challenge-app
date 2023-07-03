@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ProductIds, PRODUCT_IDS_TO_NAMES } from '../InsurancePage'
+import { ProductIds } from '../../../utils/productIds'
 import AgeStep from './components/AgeStep'
 import EmailStep from './components/EmailStep'
 import SummaryStep from './components/SummaryStep'
@@ -20,7 +20,6 @@ const BuyFlow: React.FC<BuyFlowProps> = (props) => {
   }
   return (
     <>
-      <h4>Buying {PRODUCT_IDS_TO_NAMES[props.productId]}</h4>
       {(currentStep === 'email' && <EmailStep cb={getStepCallback('age')} />) ||
         (currentStep === 'age' && (
           <AgeStep cb={getStepCallback('summary')} />

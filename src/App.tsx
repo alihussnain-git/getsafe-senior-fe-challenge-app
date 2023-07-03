@@ -6,9 +6,9 @@ import './App.css'
 
 import Header from './components/Header'
 import HomePage from './pages/HomePage'
-import BuyFlow from './pages/insurance/buyFlow/BuyFlow'
-import { ProductIds } from './pages/insurance/InsurancePage'
+import InsurancePage from './pages/insurance/InsurancePage'
 import { ROUTES } from './routes/routes'
+import { ProductIds } from './utils/productIds'
 
 
 const App: React.FC = () => {
@@ -20,7 +20,11 @@ const App: React.FC = () => {
         <Routes>
           <Route
             path={ROUTES.INSURANCE.DEVELOPER_INSURANCE}
-            element={<BuyFlow productId={ProductIds.devIns} />}
+            element={<InsurancePage productId={ProductIds.DeveloperInsurance} />}
+          />
+          <Route
+            path={ROUTES.INSURANCE.DESIGNER_INSURANCE}
+            element={<InsurancePage productId={ProductIds.DesignerInsurance} />}
           />
           <Route path={ROUTES.HOME} element={<HomePage />} />
         </Routes>
