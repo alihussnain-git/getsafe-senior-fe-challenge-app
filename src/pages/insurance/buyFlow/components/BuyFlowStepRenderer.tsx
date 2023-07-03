@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { BuyingFlowData, BuyingFlowStep, PreviousStep, StepIds } from "../types";
 import AgeStep from "./AgeStep";
 import EmailStep from "./EmailStep";
@@ -9,6 +9,8 @@ interface Props extends PreviousStep {
     step: BuyingFlowStep;
     data: BuyingFlowData;
     onNext(data: BuyingFlowData): void;
+    onPressBuy(data: BuyingFlowData): void
+
 }
 
 const BuyFlowStepRenderer: React.FC<Props> = ({
@@ -16,7 +18,9 @@ const BuyFlowStepRenderer: React.FC<Props> = ({
     onNext,
     onPre,
     data,
+    onPressBuy
 }) => {
+
     const renderStep = () => {
         switch (step.stepId) {
             case StepIds.Age:
@@ -47,11 +51,14 @@ const BuyFlowStepRenderer: React.FC<Props> = ({
                     />
                 );
             case StepIds.Summary:
-                return <SummaryStep data={data} />;
+                return <SummaryStep onNext={buyInsurance} data={data} />;
             default:
                 return <div>Error: Buying step not found</div>;
         }
     };
+
+    const buyInsurance = useCallback(() => onPressBuy(data), [data, onPressBuy])
+
 
     return renderStep();
 };

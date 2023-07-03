@@ -4,6 +4,7 @@ import { BuyingFlowData } from '../types'
 
 interface Props {
   data: BuyingFlowData;
+  onNext(): void;
 }
 
 interface DataItemProps {
@@ -13,6 +14,7 @@ interface DataItemProps {
 
 const SummaryStep: React.FC<Props> = ({
   data,
+  onNext
 }) => {
 
 
@@ -38,7 +40,7 @@ const SummaryStep: React.FC<Props> = ({
   }
 
   return (
-    <BuyFlowForm nextButtonText='Submit' onNext={() => { }}>
+    <BuyFlowForm nextButtonText='Buy' onNext={onNext}>
       {renderCollectedData()}
     </BuyFlowForm>
   )

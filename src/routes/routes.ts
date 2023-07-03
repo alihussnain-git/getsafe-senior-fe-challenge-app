@@ -3,5 +3,6 @@ export const ROUTES = {
   INSURANCE: {
     DEVELOPER_INSURANCE: '/buy/insurance_developer',
     DESIGNER_INSURANCE: '/buy/insurance_designer',
+    SUCCESSFULLY_BOUGHT: '/buy/success',
   },
 }

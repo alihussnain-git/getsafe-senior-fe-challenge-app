@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../routes/routes';
 import { getBuyStepById } from '../../../utils/getBuyStepById';
 import { ProductIds } from '../../../utils/productIds';
 import BuyFlowStepRenderer from './components/BuyFlowStepRenderer';
@@ -12,6 +14,15 @@ const BuyFlow: React.FC<Props> = ({ productId }) => {
   const steps = getBuyStepById(productId);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [collectedData, setCollectedData] = useState<BuyingFlowData>({});
+  const navigate = useNavigate();
+
+
+  const handleSuccessfulPurchase = useCallback(
+    () => {
+      navigate(ROUTES.INSURANCE.SUCCESSFULLY_BOUGHT);
+    },
+    [navigate]
+  );
 
   const onPressNext = useCallback(
     (updatedData: BuyingFlowData) => {
@@ -37,7 +48,7 @@ const BuyFlow: React.FC<Props> = ({ productId }) => {
       data={collectedData}
       onNext={onPressNext}
       onPre={currentStepIndex ? onPressPre : undefined}
-
+      onPressBuy={handleSuccessfulPurchase}
     />
   );
 };
