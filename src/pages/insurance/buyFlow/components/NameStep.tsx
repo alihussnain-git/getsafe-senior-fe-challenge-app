@@ -1,22 +1,17 @@
 import React, { useState } from 'react'
 import { BuyFlowForm } from '../../../../components/BuyFlowForm'
 import { CustomTextInput } from '../../../../components/CustomTextInput'
-import { NameStepData, PreviousStep } from '../types'
+import { BaseStep, NameStepData } from '../types'
 
-interface Props extends PreviousStep {
+interface Props extends BaseStep {
   value: NameStepData
-  onNext(data: NameStepData): void
 }
 
-const NameStep: React.FC<Props> = ({
-  value,
-  onNext,
-  onPre,
-}) => {
+const NameStep: React.FC<Props> = ({ value, onNext, onPre }) => {
   const [name, setName] = useState(value)
 
   return (
-    <BuyFlowForm onNext={() => onNext(name)} onPre={onPre}>
+    <BuyFlowForm onPre={onPre} onNext={() => onNext(name)}>
       <CustomTextInput
         label="First Name"
         id="firstName"

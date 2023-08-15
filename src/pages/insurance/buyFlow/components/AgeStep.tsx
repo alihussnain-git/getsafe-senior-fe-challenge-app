@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { BuyFlowForm } from '../../../../components/BuyFlowForm'
-import { CustomTextInput } from '../../../../components/CustomTextInput';
-import { AgeStepData, BuyingFlowAgeStep, PreviousStep } from '../types'
+import { CustomTextInput } from '../../../../components/CustomTextInput'
+import { BuyingFlowAgeStep, BaseStep } from '../types'
 
-
-interface Props extends PreviousStep {
-  value?: number;
-  onNext(data: AgeStepData): void;
+interface Props extends BaseStep {
+  value?: number
 }
 
 const AgeStep: React.FC<Props & Omit<BuyingFlowAgeStep, 'stepId'>> = ({
@@ -14,7 +12,7 @@ const AgeStep: React.FC<Props & Omit<BuyingFlowAgeStep, 'stepId'>> = ({
   onNext,
   onPre,
   min,
-  max
+  max,
 }) => {
   const [age, setAge] = useState(value)
 

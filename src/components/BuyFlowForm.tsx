@@ -1,11 +1,11 @@
 import React, { ReactNode, useRef } from 'react'
-import { PreviousStep } from '../pages/insurance/buyFlow/types';
+import { BaseStep } from '../pages/insurance/buyFlow/types'
 
-interface Props extends PreviousStep {
-  onNext(): void;
-  preButtonText?: string;
-  nextButtonText?: string;
-  children: ReactNode;
+interface Props extends BaseStep {
+  onNext(): void
+  preButtonText?: string
+  nextButtonText?: string
+  children: ReactNode
 }
 
 export const BuyFlowForm: React.FC<Props> = ({
@@ -21,8 +21,8 @@ export const BuyFlowForm: React.FC<Props> = ({
     <form
       ref={ref}
       onSubmit={(e) => {
-        e.preventDefault();
-        if (ref.current?.reportValidity()) onNext();
+        e.preventDefault()
+        if (ref.current?.reportValidity()) onNext()
       }}
     >
       {children}

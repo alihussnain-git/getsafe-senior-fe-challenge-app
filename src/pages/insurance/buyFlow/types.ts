@@ -1,50 +1,65 @@
+export interface ParentNameStepData {
+  parentFirstName?: string
+  parentLastName?: string
+}
 
 export interface AgeStepData {
-  age?: number;
+  age?: number
 }
 
 export interface EmailStepData {
-  email?: string;
+  email?: string
 }
 
 export interface NameStepData {
-  firstName?: string;
-  lastName?: string;
+  firstName?: string
+  lastName?: string
 }
 
-export type BuyingFlowData = AgeStepData & EmailStepData & NameStepData
+export type BuyingFlowData = AgeStepData &
+  EmailStepData &
+  NameStepData &
+  ParentNameStepData
 
 export enum StepIds {
   Name = 'name',
   Email = 'email',
   Age = 'age',
   Summary = 'summary',
+  ParentName = 'parentName',
 }
 
-export type BuyingFlowStep =
-  | BuyingFlowAgeStep
-  | BuyingFlowEmailStep
-  | SummaryStep
-  | BuyingFlowNameStep
+export interface BuyingFlowStep {
+  stepId: StepIds
+  condition?: (data: BuyingFlowData) => boolean
+}
+
 
 export interface BuyingFlowAgeStep {
-  stepId: StepIds.Age;
-  min?: number;
-  max?: number;
+  stepId: StepIds.Age
+  min?: number
+  max?: number
 }
 
 export interface BuyingFlowEmailStep {
-  stepId: StepIds.Email;
+  stepId: StepIds.Email
 }
 
 export interface BuyingFlowNameStep {
-  stepId: StepIds.Name;
+  stepId: StepIds.Name
+}
+
+export interface ParentNameStep {
+  stepId: StepIds.ParentName
 }
 
 export interface SummaryStep {
-  stepId: StepIds.Summary;
+  stepId: StepIds.Summary
 }
 
-export interface PreviousStep {
-  onPre?: () => void;
+
+
+export interface BaseStep {
+  onPre?: () => void
+  onNext(data: BuyingFlowData): void
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { StepIds } from '../types';
+import { BuyingFlowAgeStep, StepIds } from '../types';
 import BuyFlowStepRenderer from '../components/BuyFlowStepRenderer';
 
 describe('BuyFlowStepRenderer', () => {
@@ -55,14 +55,16 @@ describe('BuyFlowStepRenderer', () => {
         };
 
         render(
-            <BuyFlowStepRenderer
-                step={{ stepId: StepIds.Age, max: 100, min: 18 }}
-                onNext={onNext}
-                onPre={onPre}
-                data={data}
-                onPressBuy={jest.fn()}
-            />
-        );
+          <BuyFlowStepRenderer
+            step={
+              { stepId: StepIds.Age, max: 100, min: 18 } as BuyingFlowAgeStep
+            }
+            onNext={onNext}
+            onPre={onPre}
+            data={data}
+            onPressBuy={jest.fn()}
+          />
+        )
 
         expect(screen.getByLabelText('Age')).toBeInTheDocument();
     });

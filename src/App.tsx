@@ -10,9 +10,7 @@ import SuccessfulPurchasePage from './pages/insurance/SuccessfulPurchasePage'
 import { ROUTES } from './routes/routes'
 import { ProductIds } from './utils/productIds'
 
-
 const App: React.FC = () => {
-
   return (
     <div className="App">
       <Header />

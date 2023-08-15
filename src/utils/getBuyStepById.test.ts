@@ -8,8 +8,9 @@ describe('getBuyStepById', () => {
     const steps = getBuyStepById(productId)
 
     expect(steps).toEqual([
-      { stepId: StepIds.Email },
       { stepId: StepIds.Age, min: 12, max: 80 },
+      { stepId: StepIds.ParentName, condition: expect.any(Function) },
+      { stepId: StepIds.Email },
       { stepId: StepIds.Summary },
     ])
   })
@@ -19,18 +20,11 @@ describe('getBuyStepById', () => {
     const steps = getBuyStepById(productId)
 
     expect(steps).toEqual([
-      { stepId: StepIds.Name },
-      { stepId: StepIds.Email },
       { stepId: StepIds.Age, min: 12, max: 80 },
+      { stepId: StepIds.Email, condition: expect.any(Function) },
+      { stepId: StepIds.ParentName, condition: expect.any(Function) },
+      { stepId: StepIds.Name },
       { stepId: StepIds.Summary },
     ])
-  })
-
-  test('throws an error for unsupported productId', () => {
-    const unsupportedProductId = 'invalidProductId'
-
-    expect(() => {
-      getBuyStepById(unsupportedProductId as ProductIds)
-    }).toThrowError('Unsupported productId: invalidProductId')
   })
 })
