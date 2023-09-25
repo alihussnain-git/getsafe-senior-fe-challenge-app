@@ -1,6 +1,6 @@
 # Senior FE developer task
 
-This repo contains a [Solution](Solution.md) to the [Task](Task.md) provided by [Getsafe](https://www.hellogetsafe.com/en-de).
+This repo contains a [Solution](Solution.md) to the [Task](Task.md).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
