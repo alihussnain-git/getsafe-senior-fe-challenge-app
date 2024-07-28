@@ -1,4 +1,4 @@
-# Senior FE developer task
+# Frontend evaluation task
 
 This repo contains a [Solution](Solution.md) to the [Task](Task.md).
 
